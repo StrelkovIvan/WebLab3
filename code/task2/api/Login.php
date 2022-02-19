@@ -16,4 +16,4 @@ $_SESSION["surname"] = $_POST["surname"];
 $_SESSION["name"] = $_POST["name"];
 $_SESSION["age"] = $_POST["age"];
 
-header("Refresh:3; url=../login_screen.php");
+header("Refresh:1; url=../login_screen.php");
