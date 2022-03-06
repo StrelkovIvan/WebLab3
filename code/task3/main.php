@@ -36,7 +36,44 @@ while ($catName = readdir($catDir))
     <input type="submit" value = "Submit">
 </form>
 
+<p> Table Ad: </p>
+<table border = 4>
+    <tr>
+        <th> Category </th>
+        <th> Title </th>
+        <th> Email </th>
+        <th> Ad </th>
+    </tr>
+    <?php
+    foreach ($catList as $catName)
+    {
+        $dir = opendir("categories/$catName");
+        while ($Name = readdir($dir))
+            if (is_file('categories/'.$catName."/".$Name) )
+            {
+                $adList[$catName][$Name] = $Name;
+            }
+    }
 
+    foreach ($adList as $catN => $adsN)
+        foreach ($adsN as $v)
+        {
+            $filePath = "categories/" . $catN . "/" . $v ;
+            $file = fopen($filePath, "r");
+            $email = fgets($file);
+            $text = "";
+            while (!feof($file))
+                $text .= fgets($file);
+            fclose($file);
+
+            echo "<tr> <td> $catN </td>",
+            "<td> $v </td>",
+            "<td> $email </td>",
+            "<td> $text </td>";
+        }
+
+    ?>
+</table>
 
 </body>
 </html>
